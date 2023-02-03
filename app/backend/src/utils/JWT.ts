@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
 
-import { HTTP_UNAUTHORIZED } from '../utils/statusCode';
+import { HTTP_UNAUTHORIZED } from './statusCode';
 
 dotenv.config();
 
@@ -19,12 +19,6 @@ export default class JWT {
 
     return token;
   };
-
-  // public verifyToken = (token: string) => {
-  //   const decoded = jwt.verify(token, this.tokenSecret);
-
-  //   return decoded;
-  // };
 
   public verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const token = req.header('Authorization');
