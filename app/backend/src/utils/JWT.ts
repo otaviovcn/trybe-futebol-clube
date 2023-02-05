@@ -29,8 +29,7 @@ export default class JWT {
       req.body.user = verifyToken;
       next();
     } catch (error) {
-      console.log(error);
-      res.status(HTTP_UNAUTHORIZED).json({ message: 'Invalid token' });
+      res.status(HTTP_UNAUTHORIZED).json({ message: 'Token must be a valid token' });
     }
   };
 }
