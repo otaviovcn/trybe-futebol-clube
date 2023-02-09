@@ -22,7 +22,9 @@ export default class LoginController {
   };
 
   public validate = async (req: Request, res: Response) => {
-    const { role } = req.body.user;
+    const { data } = req.body.user;
+    const { role } = data.payload;
+
     return res.status(HTTP_OK).json({ role });
   };
 }

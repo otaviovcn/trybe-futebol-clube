@@ -7,7 +7,7 @@ import { HTTP_UNAUTHORIZED } from './statusCode';
 dotenv.config();
 
 export default class JWT {
-  private tokenSecret: string = process.env.JWT_SECRET || 'tokendefault';
+  public tokenSecret: string = process.env.JWT_SECRET || 'tokendefault';
 
   private jwtConfig: object = {
     expiresIn: '1d',
@@ -21,7 +21,7 @@ export default class JWT {
   };
 
   public verifyToken = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.header('authorization');
+    const token = req.header('Authorization');
 
     if (!token) return res.status(HTTP_UNAUTHORIZED).json({ message: 'Token not found' });
 

@@ -1,6 +1,5 @@
 import * as express from 'express';
 
-// import router from './routes';
 import routes from './routes';
 
 class App {
