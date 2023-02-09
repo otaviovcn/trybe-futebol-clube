@@ -3,7 +3,7 @@ export interface ILogin {
   password: string,
 }
 
-export interface ILoginResponse {
-  type: number,
-  message: string | undefined,
-}
+// export interface ILoginResponse {
+//   type: number,
+//   message: string | undefined,
+// }

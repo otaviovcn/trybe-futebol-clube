@@ -1,7 +1,8 @@
 import * as bcrypt from 'bcryptjs';
 
 import User from '../database/models/User';
-import { ILogin, ILoginResponse } from '../interfaces/login.interface';
+import IResponse from '../interfaces/responseDefault.interface';
+import { ILogin } from '../interfaces/login.interface';
 
 import { HTTP_OK, HTTP_UNAUTHORIZED } from '../utils/statusCode';
 
@@ -14,7 +15,7 @@ export default class LoginService {
     this._JWT = new JWT();
   }
 
-  public login = async ({ email, password }: ILogin): Promise<ILoginResponse> => {
+  public login = async ({ email, password }: ILogin): Promise<IResponse<ILogin>> => {
     const userFound = await User.findOne({ where: { email } });
     if (!userFound) {
       return { type: HTTP_UNAUTHORIZED, message: 'Incorrect email or password' };
