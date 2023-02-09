@@ -14,4 +14,10 @@ export default class TeamsController {
 
     return res.status(type).json(message);
   };
+
+  public getOneTeam = async (req: Request, res: Response) => {
+    const { type, message } = await this.teamsService.getOneTeam(req.params.id);
+
+    return res.status(type).json(message);
+  };
 }

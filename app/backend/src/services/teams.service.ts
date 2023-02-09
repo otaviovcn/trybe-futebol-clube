@@ -13,4 +13,13 @@ export default class TeamsService {
       return { type: HTTP_INTERNAL_SERVER_ERROR, message: 'Internal Server Error' };
     }
   };
+
+  public getOneTeam = async (id: string): Promise<IResponse<ITeams>> => {
+    try {
+      const team = await Teams.findOne({ where: { id } });
+      return { type: HTTP_OK, message: team };
+    } catch (error) {
+      return { type: HTTP_INTERNAL_SERVER_ERROR, message: 'Internal Server Error' };
+    }
+  };
 }
