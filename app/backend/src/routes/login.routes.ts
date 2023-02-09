@@ -9,6 +9,6 @@ const loginController = new LoginController();
 const router = Router();
 
 router.post('/', validateLogin, loginController.login);
-router.get('/verify', jwt.verifyToken, loginController.validate);
+router.get('/validate', jwt.verifyToken, loginController.validate);
 
 export default router;

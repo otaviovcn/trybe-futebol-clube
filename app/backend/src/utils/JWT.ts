@@ -21,7 +21,8 @@ export default class JWT {
   };
 
   public verifyToken = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.header('Authorization');
+    const token = req.header('authorization');
+
     if (!token) return res.status(HTTP_UNAUTHORIZED).json({ message: 'Token not found' });
 
     try {
