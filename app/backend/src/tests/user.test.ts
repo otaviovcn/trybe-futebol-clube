@@ -20,7 +20,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Testes do endpoint /login', () => {
-  const { stub } = require('sinon');
+  // const { stub } = require('sinon');
   /**
    * Exemplo do uso de stubs com tipos
    */
