@@ -5,12 +5,8 @@ import * as bcrypt from "bcryptjs";
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import TeamsModel from '../database/models/Teams';
-import {
-  ALL_TEAMS,
-  ONE_TEAM,
-} from './mocks/teams.mocks.test';
-import { HTTP_OK, HTTP_BAD_REQUEST, HTTP_UNPROCESSABLE_ENTITY } from '../utils/statusCode';
+import { ALL_TEAMS, ONE_TEAM } from './mocks/teams.mocks.test';
+import { HTTP_OK } from '../utils/statusCode';
 
 import { Response } from 'superagent';
 
@@ -32,23 +28,4 @@ describe('Testes dos endpoints /teams e /teams:id', () => {
     expect(status).to.be.deep.equal(HTTP_OK);
     expect(body).to.be.deep.equal(ALL_TEAMS);
   });
-
-  // it('Testa o retorno da rota /tams/:id', async () => {
-  //   const email = 'teste@teste.com';
-  //   const password = '123';
-  //   const result = await chai.request(app).post("/login").send({ email, password });
-
-
-  //   expect(result.status).to.be.equal(HTTP_UNPROCESSABLE_ENTITY);
-  //   expect(result.text).to.be.equal(`{"message":${JSON.stringify(MIN_LENGTH_PASSWORD_MESSAGE)}}`);
-  // });
-
-  // it('Testa o retorno ao não passar um dos campos na requisição', async () => {
-  //   const email = 'teste@teste.com';
-  //   const result = await chai.request(app).post("/login").send({ email });
-
-
-  //   expect(result.status).to.be.equal(HTTP_BAD_REQUEST);
-  //   expect(result.text).to.be.equal(`{"message":${JSON.stringify(NO_PASSWORD_OR_EMAIL_MESSAGE)}}`);
-  // });
 });

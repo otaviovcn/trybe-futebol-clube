@@ -20,4 +20,24 @@ export default class MatchController {
 
     return res.status(type).json(message);
   };
+
+  public saveMatches = async (req: Request, res: Response) => {
+    const { type, message } = await this.matchService.saveMatches(req.body);
+
+    return res.status(type).json(message);
+  };
+
+  public endMatch = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { type, message } = await this.matchService.endMatch(id);
+
+    return res.status(type).json({ message });
+  };
+
+  public updateMatch = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { type, message } = await this.matchService.updateMatch(id, req.body);
+
+    return res.status(type).json({ message });
+  };
 }
