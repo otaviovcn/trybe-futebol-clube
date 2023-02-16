@@ -7,7 +7,7 @@ import { app } from '../app';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Testes do endpoint /matches', () => {
+describe('Testa a rota /matches', () => {
   afterEach(sinon.restore);
 
   it('Checa se retornou jogos finalizados', async () => {
