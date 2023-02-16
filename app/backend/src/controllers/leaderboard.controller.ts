@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
-
-import Leaderboard from '../services/leaderboard.service';
+import LeaderboardService from '../services/leaderboard.service';
 
 export default class LeaderboardController {
-  public leaderboardService;
+  private leaderboardService;
 
   constructor() {
-    this.leaderboardService = new Leaderboard();
+    this.leaderboardService = new LeaderboardService();
   }
 
-  public getLeaderboard = async (req: Request, res: Response) => {
-    const { type, message } = await this.leaderboardService.getLeaderboard();
-
+  public getLeaderboardHome = async (_req: Request, res: Response) => {
+    const { type, message } = await this.leaderboardService.getLeaderboardHome();
+    message.sort((a, b) => b.totalPoints - a.totalPoints || b.goalsBalance - a.goalsBalance
+      || b.goalsFavor - a.goalsFavor || b.goalsOwn - a.goalsOwn);
     return res.status(type).json(message);
   };
 }

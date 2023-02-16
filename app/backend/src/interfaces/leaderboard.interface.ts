@@ -1,4 +1,5 @@
-export interface ILeaderBoard {
+export interface ILeaderboard {
+  id?: number;
   name:string;
   totalPoints:number,
   totalGames:number,
@@ -9,4 +10,9 @@ export interface ILeaderBoard {
   goalsOwn:number,
   goalsBalance:number,
   efficiency:number,
+}
+
+export interface IResponse<T> {
+  type: number;
+  message: T;
 }
