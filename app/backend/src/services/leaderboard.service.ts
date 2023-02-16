@@ -49,4 +49,24 @@ export default class LeaderboardService {
     });
     return { type: HTTP_OK, message: board };
   };
+
+  public getLeaderboardAway = async (): Promise<IResponse<ILeaderboard[]>> => {
+    const board = await this.createBoard();
+    const matches: IMatches[] = await Matches.findAll({ where: { inProgress: false } });
+    matches.forEach((match) => {
+      const team = board.find((item) => match.awayTeamId === item.id) as ILeaderboard;
+      if (match.awayTeamGoals > match.homeTeamGoals) {
+        team.totalPoints += 3;
+        team.totalVictories += 1;
+      } else if (match.awayTeamGoals < match.homeTeamGoals) {
+        team.totalLosses += 1;
+      } else { team.totalPoints += 1; team.totalDraws += 1; }
+      team.totalGames += 1;
+      team.goalsFavor += match.awayTeamGoals;
+      team.goalsOwn += match.homeTeamGoals;
+      team.goalsBalance = team.goalsFavor - team.goalsOwn;
+      team.efficiency = this.calculateEfficiency(team as ILeaderboard);
+    });
+    return { type: HTTP_OK, message: board };
+  };
 }

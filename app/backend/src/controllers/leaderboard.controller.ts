@@ -14,4 +14,11 @@ export default class LeaderboardController {
       || b.goalsFavor - a.goalsFavor || b.goalsOwn - a.goalsOwn);
     return res.status(type).json(message);
   };
+
+  public getLeaderboardAway = async (_req: Request, res: Response) => {
+    const { type, message } = await this.leaderboardService.getLeaderboardAway();
+    message.sort((a, b) => b.totalPoints - a.totalPoints || b.goalsBalance - a.goalsBalance
+      || b.goalsFavor - a.goalsFavor || b.goalsOwn - a.goalsOwn);
+    return res.status(type).json(message);
+  };
 }
