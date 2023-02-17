@@ -21,4 +21,9 @@ export default class LeaderboardController {
       || b.goalsFavor - a.goalsFavor || b.goalsOwn - a.goalsOwn);
     return res.status(type).json(message);
   };
+
+  public getResultBoard = async (_req: Request, res: Response) => {
+    const { type, message } = await this.leaderboardService.getResultBoard();
+    return res.status(type).json(message);
+  };
 }

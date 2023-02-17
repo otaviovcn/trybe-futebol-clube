@@ -69,4 +69,25 @@ export default class LeaderboardService {
     });
     return { type: HTTP_OK, message: board };
   };
+
+  public getResultBoard = async (): Promise<IResponse<ILeaderboard[]>> => {
+    const { message: homeList }: { message: ILeaderboard[] } = await this.getLeaderboardHome();
+    const { message: awayList }: { message: ILeaderboard[] } = await this.getLeaderboardAway();
+    const board = homeList.map((homeTeam) => {
+      const team = awayList.find((awayTeam) => homeTeam.name === awayTeam.name) as ILeaderboard;
+      team.totalPoints += homeTeam.totalPoints;
+      team.totalDraws += homeTeam.totalDraws;
+      team.totalVictories += homeTeam.totalVictories;
+      team.totalLosses += homeTeam.totalLosses;
+      team.totalGames += homeTeam.totalGames;
+      team.goalsFavor += homeTeam.goalsFavor;
+      team.goalsOwn += homeTeam.goalsOwn;
+      team.goalsBalance += homeTeam.goalsBalance;
+      team.efficiency = this.calculateEfficiency(team);
+      return team;
+    });
+    board.sort((a, b) => b.totalPoints - a.totalPoints || b.goalsBalance - a.goalsBalance
+      || b.goalsFavor - a.goalsFavor || b.goalsOwn - a.goalsOwn);
+    return { type: HTTP_OK, message: board };
+  };
 }
